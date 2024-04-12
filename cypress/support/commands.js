@@ -27,9 +27,20 @@
 
 
 // Login Command
-Cypress.Commands.add('login',(username,password) =>{
+Cypress.Commands.add('login', () => {
+        // Assign the userdata as user 
+        cy.fixture('userdata').as('user')
 
-    cy.get('#user-name').should('be.visible').type(username)
-    cy.get('#password').should('be.visible').type(password)
-    cy.get('#login-button').should('be.visible').click()
+        // Navigate the login page and verify the title is 'Swag Labs'
+        
+        cy.visit('/').title().should('eq', 'Swag Labs')
+        cy.get('@user').then(user => {
+            cy.get('#user-name').should('be.visible').type(user.username)
+            cy.get('#password').should('be.visible').type(user.password)
+            cy.get('#login-button').should('be.visible').click()
+        })
+
+        // Verify that the user can able to log in successfully
+        cy.url().should('eq', "https://www.saucedemo.com/inventory.html")
+
 })
