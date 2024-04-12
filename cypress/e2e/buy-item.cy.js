@@ -70,7 +70,7 @@ describe('Buy item', () => {
         cy.get('#finish').click()
 
         // Verify that the user can able to buy item and "Thank you for your order" message is displayed
-        cy.get('.complete-header').should('have.text','Thank you for your order')
+        cy.get('.complete-header').should('have.text','Thank you for your order!')
 
         // Verify that the total price is as expected
 
