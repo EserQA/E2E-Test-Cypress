@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 // const { indexOfMax } = require('C:/Users/durak/E2E-Test-Cypress/cypress/utilities/common.js')
-import { indexOfMax } from'C:/Users/durak/E2E-Test-Cypress/cypress/utilities/common.js'
+import { indexOfMax } from'/cypress/utilities/common.js'
 
 describe('Buy item', () => {
 
