@@ -3,6 +3,7 @@
     "cypress": "^13.7.3"
   },
   "scripts": {
-    "test": "cypress run"
+    "dev": "cypress run --browser chrome --env version=\"dev\" --headed",
+    "uat": "cypress run --browser chrome --env version=\"uat\" --headed"
   }
 }

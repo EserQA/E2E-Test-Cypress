@@ -1,38 +1,53 @@
 /// <reference types="cypress" />
+// const { indexOfMax } = require('C:/Users/durak/E2E-Test-Cypress/cypress/utilities/common.js')
+import { indexOfMax } from'C:/Users/durak/E2E-Test-Cypress/cypress/utilities/common.js'
 
 describe('Buy item', () => {
 
     //Login Functionality
 
     beforeEach(() => {
-        cy.session('user', () => {           
+        cy.session('user', () => {
             cy.login()
         }, {
             validate() {
-              cy.document()
-                .its('cookie')
-                .should('contain', 'session-username')
+                cy.document()
+                    .its('cookie')
+                    .should('contain', 'session-username')
             }
-          })
+        })
 
         // Log in with ready login commands 
         cy.login()
-        
+
     })
 
     // Buy Functionality 
-    it('Buys item from the site', () => {
+    it('TC-001 Buy the highest price item without using the sort feature', () => {
+        // Get the price of the highest price item 
+        let prices = []
+        cy.get('.inventory_item_price').each(item => {
+            cy.get(item).invoke('prop', 'textContent').then(el => {
+                let arr = el.split('$')
+                let price = arr[1]
+                prices.push(parseFloat(price))
+            })
 
-        // Get the item price
-        cy.get('.inventory_item_price').first().invoke('prop', 'textContent').then(itemPrice => {
-            let arr = itemPrice.split('$')
-            itemPrice = parseFloat(arr[1])
-            cy.wrap(itemPrice).as('itemPrice')
+        }).then(() => {
+            console.log(indexOfMax(prices))
+            cy.wrap(indexOfMax(prices)).as('highestPriceItemIndex')
         })
 
-
-        // Add the item to the cart
-        cy.get('#add-to-cart-sauce-labs-backpack').click()
+        // Add the highest price item to the cart
+        cy.get('@highestPriceItemIndex').then(highestPriceItemIndex => {
+            cy.get('.inventory_item_price').eq(highestPriceItemIndex).invoke('prop', 'textContent').then(itemPrice => {
+                let arr = itemPrice.split('$')
+                itemPrice = parseFloat(arr[1])
+                console.log
+                cy.wrap(itemPrice).as('itemPrice')
+                cy.get('[data-test^="add-to-cart"]').eq(highestPriceItemIndex).click()
+            })
+        })
 
         // Click the cart icon to navigate your cart
         cy.get('.shopping_cart_link').click()
@@ -70,7 +85,7 @@ describe('Buy item', () => {
         cy.get('#finish').click()
 
         // Verify that the user can able to buy item and "Thank you for your order" message is displayed
-        cy.get('.complete-header').should('have.text','Thank you for your order!')
+        cy.get('.complete-header').should('have.text', 'Thank you for your order!')
 
         // Verify that the total price is as expected
 
