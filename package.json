@@ -1,9 +1,12 @@
 {
   "devDependencies": {
-    "cypress": "^13.7.3"
+    "cypress": "^13.13.1"
   },
   "scripts": {
     "dev": "cypress run --browser chrome --env version=\"dev\" --headed",
     "uat": "cypress run --browser chrome --env version=\"uat\" --headed"
+  },
+  "dependencies": {
+    "cypress-plugin-api": "^2.11.2"
   }
 }

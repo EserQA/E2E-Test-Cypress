@@ -24,23 +24,20 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-
-
 // Login Command
-Cypress.Commands.add('login', () => {
-        // Assign the userdata as user 
-        cy.fixture('userdata').as('user')
+Cypress.Commands.add("login", () => {
+  // Assign the userdata as user
+  cy.fixture("userdata").as("user");
 
-        // Navigate the login page and verify the title is 'Swag Labs'
-        
-        cy.visit('/').title().should('eq', 'Swag Labs')
-        cy.get('@user').then(user => {
-            cy.get('#user-name').should('be.visible').type(user.username)
-            cy.get('#password').should('be.visible').type(user.password)
-            cy.get('#login-button').should('be.visible').click()
-        })
+  // Navigate the login page and verify the title is 'Swag Labs'
 
-        // Verify that the user can able to log in successfully
-        cy.url().should('eq', "https://www.saucedemo.com/inventory.html")
+  cy.visit("/").title().should("eq", "Swag Labs");
+  cy.get("@user").then((user) => {
+    cy.get("#user-name").should("be.visible").type(user.username);
+    cy.get("#password").should("be.visible").type(user.password);
+    cy.get("#login-button").should("be.visible").click();
+  });
 
-})
+  // Verify that the user can able to log in successfully
+  cy.url().should("eq", "https://www.saucedemo.com/inventory.html");
+});
