@@ -10,4 +10,4 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npx cypress run dev
-          spec: cypress/e2e/buy-item.cy.js
+          spec: cypress/e2e/form-io-api-test.cy.js
