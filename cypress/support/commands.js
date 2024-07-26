@@ -31,7 +31,7 @@ Cypress.Commands.add("login", () => {
 
   // Navigate the login page and verify the title is 'Swag Labs'
 
-  cy.visit("/").title().should("eq", "Swag Labs");
+  cy.visit("").title().should("eq", "Swag Labs");
   cy.get("@user").then((user) => {
     cy.get("#user-name").should("be.visible").type(user.username);
     cy.get("#password").should("be.visible").type(user.password);

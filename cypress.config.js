@@ -7,7 +7,11 @@ module.exports = defineConfig({
   env: {
     requestMode: true,
     hideCredentials: true,
+    hideCredentialsOptions: {
+      headers: ["x-jwt-token"],
+    },
   },
+
   e2e: {
     setupNodeEvents(on, config) {
       const version = config.env.version || "dev";
