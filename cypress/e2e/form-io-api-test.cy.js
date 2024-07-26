@@ -2,7 +2,7 @@
 import { faker } from "@faker-js/faker";
 
 describe("Form.io api test", () => {
-  it("TC-001 POST - Create a new account / POST - Login to Form.io / GET - Get the current user / GET - Logout of Form.io", () => {
+  it("TC-001 /POSITIVE / POST - Create a new account / POST - Login to Form.io / GET - Get the current user / GET - Logout of Form.io", () => {
     let userToken;
     let name = "user" + faker.number.int({ min: 1000, max: 9999 });
     let email = faker.internet.email().toLowerCase();
