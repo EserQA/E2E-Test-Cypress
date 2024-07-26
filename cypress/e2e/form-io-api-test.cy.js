@@ -91,7 +91,7 @@ describe("Form.io api test", () => {
     });
   });
 
-  it("TC-002 POST - Unable to create a new account", () => {
+  it("TC-002 / Negative / POST - Unable to create a new account", () => {
     cy.request({
       method: "POST",
       url: "/user/register",
